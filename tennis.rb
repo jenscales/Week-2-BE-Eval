@@ -20,7 +20,10 @@ module Tennis
       # TODO: Think it's gross to pass an integer 
       #instead of a player object?
       # Then reimplement this method!
+      
+      winner.record_won_ball!
     end
+    
   end
 
   class Player
