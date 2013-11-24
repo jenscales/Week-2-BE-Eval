@@ -18,6 +18,15 @@ describe Tennis::Game do
     end
   end
 
+  describe '#playgame' do
+    it 'starts serve and gives a point to winner' do
+      serve = 1
+      game.playgame(1)
+
+      expect(game.player1.points).to eq(1)
+    end
+  end
+
   describe '#wins_ball' do
     it 'increments the points of the winning player' do
       game.wins_ball(game.player1)

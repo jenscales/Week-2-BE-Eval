@@ -9,8 +9,23 @@ module Tennis
       @player1.opponent = @player2
       @player2.opponent = @player1
     end
-
+    
+    # def game_serve
+    #   serve = 1 + rand(2)
+    # end
+    
     serve = 1 + rand(2)
+    
+    def playgame(serve)
+      if serve == 1 
+        player1.record_won_ball!
+        puts "Player1 has won the ball. #{player1.points}"
+      else
+        player2.record_won_ball!
+        puts "Player2 has won the ball. #{player2.points}"
+      end  
+    end 
+
 
     # Records a win for a ball in a game.
     #
@@ -43,10 +58,6 @@ module Tennis
       @points += 1
     end
     
-    def points
-      @points
-    end
-
     # Returns the String score for the player.
     def score
       return 'love' if @points == 0
@@ -56,3 +67,4 @@ module Tennis
     end
   end
 end
+
