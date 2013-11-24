@@ -10,6 +10,8 @@ module Tennis
       @player2.opponent = @player1
     end
 
+    serve = 1 + rand(2)
+
     # Records a win for a ball in a game.
     #
     # winner - The Integer (1 or 2) representing
@@ -34,13 +36,15 @@ module Tennis
       @opponent = opponent
     end
 
-
-
     # Increments the score by 1.
     #
     # Returns the integer new score.
     def record_won_ball!
       @points += 1
+    end
+    
+    def points
+      @points
     end
 
     # Returns the String score for the player.
