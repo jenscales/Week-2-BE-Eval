@@ -10,20 +10,75 @@ module Tennis
       @player2.opponent = @player1
     end
     
-    # def game_serve
-    #   serve = 1 + rand(2)
-    # end
-    
-    serve = 1 + rand(2)
-    
-    def playgame(serve)
-      if serve == 1 
-        player1.record_won_ball!
-        puts "Player1 has won the ball. #{player1.points}"
-      else
-        player2.record_won_ball!
-        puts "Player2 has won the ball. #{player2.points}"
-      end  
+
+    def playgame
+      counter = 0
+      while counter < 20
+        serve = 1 + rand(2)
+        if serve == 1 
+          player1.record_won_ball!
+          puts "Player1 has won the ball."
+        else
+          player2.record_won_ball!
+          puts "Player2 has won the ball."
+          
+        end 
+        
+        puts "The score is: Player1 = #{player1.score} to Player2 = #{player2.score}"
+        counter = counter + 1
+        
+        case
+        when player1.points == 0 && player2.points > 4
+          puts "Player 2 has won the game!"
+          return
+        when player2.points == 0 && player1.points > 4
+          puts "Player 1 has won the game!"
+          return   
+        when
+          player1.points <= 2 && player2.points <= 3
+          puts "Keep playing."
+        when 
+          player1.points <= 3 && player2.points <= 2
+          puts "Keep playing."
+        when
+          player1.points <= 2 && player2.points <= 2
+          puts "Keep playing."
+        when 
+          player1.points == 3 && player2.points <= 2
+          puts "Keep playing."
+        when
+          player1.points == 1 && player2.points <= 2
+          puts "Keep playing."
+        when
+          player1.points == 3 && player2.points == 3 
+          puts "Game is in Duece."
+        when
+          player1.points == 4 && player2.points == 3
+          puts "Player 1 has advantage, Keep playing!"
+        when
+          player1.points == 3 && player2.points == 4
+          puts "Player 2 has advantage, Keep playing!"
+        when
+          player1.points == 4 && player2.points <= 2
+          puts "Player 1 has won the game!"
+          return
+        when
+          player1.points <= 2 && player2.points == 4
+          puts "Player 2 has won the game!"
+          return
+        when
+          player1.points == 5 && player2.points == 3
+          puts "Player 1 has won the ball and the game!"
+          return
+        when
+          player1.points == 3 && player2.points == 5
+          puts "Player 2 has won the ball and the game!"
+          return
+        else
+          puts "This is a good game! Keep Playing."
+        end 
+      puts "-------------------------------------------------------------------------"
+      end
     end 
 
 
@@ -40,8 +95,9 @@ module Tennis
 
       winner.record_won_ball!
     end
-    
   end
+
+
 
   class Player
     attr_accessor :points, :opponent
@@ -64,7 +120,10 @@ module Tennis
       return 'fifteen' if @points == 1
       return 'thirty' if @points == 2
       return 'forty' if @points == 3
+      return 'advantage' if @points == 4
+      return 'win' if @points == 5
     end
   end
 end
 
+Tennis::Game.new.playgame
