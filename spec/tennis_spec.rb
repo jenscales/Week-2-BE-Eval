@@ -18,12 +18,14 @@ describe Tennis::Game do
     end
   end
 
+  #I'm stuck on this.  I have playgame working, but not sure how to write test.
+  # Need some help! It's late and I've been doing this all day.
   describe '#playgame' do
-    it 'starts serve and gives a point to winner' do
-      serve = 1
-      game.playgame(1)
-
+    context 'starts serve' do
+      it 'gives winner point' do
+        serve = 1
       expect(game.player1.points).to eq(1)
+      expect(game.player2.points).to eq(0)
     end
   end
 
@@ -86,6 +88,22 @@ describe Tennis::Player do
         player.points = 3
 
         expect(player.score).to eq('forty')
+      end
+    end
+
+    context 'when points is 4' do
+      it 'returns advantage' do
+        player.points = 4
+
+        expect(player.score).to eq('advantage')
+      end
+    end
+
+    context 'when points is 5' do
+      it 'returns win' do
+        player.points = 5
+
+        expect(player.score).to eq('win')
       end
     end
   

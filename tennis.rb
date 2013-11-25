@@ -2,6 +2,7 @@ module Tennis
   class Game
     attr_accessor :player1, :player2
 
+    # This sets Player1 and Player2 when a new Game is run
     def initialize
       @player1 = Player.new
       @player2 = Player.new
@@ -10,10 +11,12 @@ module Tennis
       @player2.opponent = @player1
     end
     
-
+    # This is the actual Tennis Game.  
     def playgame
       counter = 0
       while counter < 20
+        # Each Serve of the Ball is random: either a 1 or 2 is returned.  
+        # If serve results in a 1, player 1 wins point. Else, player 2 wins point.
         serve = 1 + rand(2)
         if serve == 1 
           player1.record_won_ball!
@@ -21,62 +24,66 @@ module Tennis
         else
           player2.record_won_ball!
           puts "Player2 has won the ball."
-          
         end 
-        
+        #This reports the current score of the game after each serve.
         puts "The score is: Player1 = #{player1.score} to Player2 = #{player2.score}"
+        #This increases the counter by 1. Game keeps playing till it's won.
         counter = counter + 1
         
-        case
-        when player1.points == 0 && player2.points > 4
-          puts "Player 2 has won the game!"
-          return
-        when player2.points == 0 && player1.points > 4
-          puts "Player 1 has won the game!"
-          return   
-        when
-          player1.points <= 2 && player2.points <= 3
-          puts "Keep playing."
-        when 
-          player1.points <= 3 && player2.points <= 2
-          puts "Keep playing."
-        when
-          player1.points <= 2 && player2.points <= 2
-          puts "Keep playing."
-        when 
-          player1.points == 3 && player2.points <= 2
-          puts "Keep playing."
-        when
-          player1.points == 1 && player2.points <= 2
-          puts "Keep playing."
-        when
-          player1.points == 3 && player2.points == 3 
-          puts "Game is in Duece."
-        when
-          player1.points == 4 && player2.points == 3
-          puts "Player 1 has advantage, Keep playing!"
-        when
-          player1.points == 3 && player2.points == 4
-          puts "Player 2 has advantage, Keep playing!"
-        when
-          player1.points == 4 && player2.points <= 2
-          puts "Player 1 has won the game!"
-          return
-        when
-          player1.points <= 2 && player2.points == 4
-          puts "Player 2 has won the game!"
-          return
-        when
-          player1.points == 5 && player2.points == 3
-          puts "Player 1 has won the ball and the game!"
-          return
-        when
-          player1.points == 3 && player2.points == 5
-          puts "Player 2 has won the ball and the game!"
-          return
-        else
-          puts "This is a good game! Keep Playing."
+        #The Case looks at the scores of each player and either continues the game or ends 
+        #the game if there is a winner.
+        case 
+          when player1.points == 0 && player2.points > 4
+            puts "Player 2 has won the game!"
+            return  #This ends the game and kills the while loop.
+          when player2.points == 0 && player1.points > 4
+            puts "Player 1 has won the game!"
+            return   #This ends the game and kills the while loop.
+          when
+            player1.points <= 2 && player2.points <= 3
+            puts "Keep playing."
+          when 
+            player1.points <= 3 && player2.points <= 2
+            puts "Keep playing."
+          when
+            player1.points <= 2 && player2.points <= 2
+            puts "Keep playing."
+          when 
+            player1.points == 3 && player2.points <= 2
+            puts "Keep playing."
+          when
+            player1.points == 1 && player2.points <= 2
+            puts "Keep playing."
+          when
+            player1.points == 3 && player2.points == 3 
+            puts "Game is in Duece."
+          when
+            player1.points == 4 && player2.points == 3
+            puts "Player 1 has advantage, Keep playing!"
+          when
+            player1.points == 3 && player2.points == 4
+            puts "Player 2 has advantage, Keep playing!"
+          when
+            player1.points == 4 && player2.points <= 2
+            puts "Player 1 has won the game!"
+            return #This ends the game and kills the while loop.
+          when
+            player1.points <= 2 && player2.points == 4
+            puts "Player 2 has won the game!"
+            return  #This ends the game and kills the while loop.
+          when
+            player1.points == 5 && player2.points == 3
+            puts "Player 1 has won the ball and the game!"
+            return  #This ends the game and kills the while loop.
+          when
+            player1.points == 3 && player2.points == 5
+            puts "Player 2 has won the ball and the game!"
+            return#This ends the game and kills the while loop.
+          else  #This is a catch all for any scores I missed, but I think I got them all.
+            puts "This is a good game! Keep Playing."
         end 
+      #This line is used to break up each Serve of the Ball, in the game, so it's easy to 
+      # read the current game results.
       puts "-------------------------------------------------------------------------"
       end
     end 
