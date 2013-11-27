@@ -72,13 +72,36 @@ module Tennis
             puts "Player 2 has won the game!"
             return  #This ends the game and kills the while loop.
           when
-            player1.points == 5 && player2.points == 3
+            player1.points == 5 && player2.points <= 3
             puts "Player 1 has won the ball and the game!"
             return  #This ends the game and kills the while loop.
           when
-            player1.points == 3 && player2.points == 5
+            player1.points <= 3 && player2.points == 5
             puts "Player 2 has won the ball and the game!"
             return#This ends the game and kills the while loop.
+          when 
+            player1.points == 4 && player2.points == 4
+            puts "This game is getting intense. Keep playing!"
+          when 
+            player1.points == 4 && player2.points >= 6
+            puts "Player 2 has won the ball and the game!"
+            return
+          when 
+            player2.points == 4 && player1.points >= 6
+            puts "Player 1 has won the ball and the game!"
+            return
+          when 
+            player1.points > 3 && player1.points > player2.points + 1
+            puts ":o) Player 1 has won the ball and the game!"
+            return
+          when 
+            player2.points > 3 && player2.points > player1.points + 1
+            puts ":o) Player 2 has won the ball and the game!"
+            return
+
+# "player1 wins!" if @points > 3 && @points > @opponent.points + 1
+#       return "opponent wins!" if @opponent.points > 3 && @opponent.points > @points + 1
+
           else  #This is a catch all for any scores I missed, but I think I got them all.
             puts "This is a good game! Keep Playing."
         end 
@@ -128,7 +151,7 @@ module Tennis
       return 'thirty' if @points == 2
       return 'forty' if @points == 3
       return 'advantage' if @points == 4
-      return 'win' if @points == 5
+      return 'adv +' if @points >= 5
     end
   end
 end
